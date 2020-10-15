@@ -8,6 +8,7 @@ class Handler(object):
         self.command = None
 
     def handleOpenCommands(self, query):
+        playsound('audio\\opening_app.mp3')
         query = str(query).replace('open ', '').strip()
         keyFound = False
         keys = self.a.keys
