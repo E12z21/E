@@ -11,7 +11,21 @@ J.A.R.V.I.S is a personal assistant that can -
 
 ## Log
 
-v0.2 - Currently, speech recognition is not working (because pyaudio and speech recognition decide not to work on my computer!). Have to type in commands into Python Console. Can automate searches on the internet, open apps. Can also talk using AI generated speech. v0.2 only compatible with Windows devices. Upcoming features would be to be able to close apps, create reports, a scheduler, an inbuilt timetable, more apps that can be opened (and closed) via JARVIS, bug fixes, etc. Location searches, being able to tell the time, get weather from weather api, etc.
+v0.3 - Finally! Speech Recognition works! It's because I forgot to change mic settings in... settings. Also added answers to conversational questions like how are you, etc. Also opens up more apps (File Explorer and Calculator to be precise). Still need to fix internet searches (they have sort of been screwed thanks to speech recognition). Need to add - 
+
+- Calc functions to JARVIS
+- Weather API (to gather info about weather)
+- Close apps (currently, it can only open them)
+- create reports (health reports, usage reports, inspired by iOS' Screen Usage report)
+- Scheduler and inbuilt timetable
+- A GUI for JARVIS (similar to most personal AI assistants like Siri and Google, etc.)
+- Export the JARVIS assistant as .exe for easier installation
+- Automation of multiple tasks at once (e.g. - 'Open microsoft word, then search "how to write a story" using chrome')
+- File Manipulation (e.g. open, read, write, edit and save files)
+- Wake Detection for JARVIS (e.g. 'Hey JARVIS!')
+- Database filled with answers to questions used in conversational speech (not a necessity)
+- Recommendations (health recommendations, weather recommendations, etc.)
+- Email Manipulation (Able to open, read, write, edit and send emails. This is not a necessity)
 
 ## In Depth
 
