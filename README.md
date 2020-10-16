@@ -1,4 +1,4 @@
-# J.A.R.V.I.S - Personal Assistant
+[J.A.R.V.I.S - Personal Assistant](https://github.com/rudrathegreat/J.A.R.V.I.S/blob/main/JARVIS_cover.jpg)
 ## Overview
 
 J.A.R.V.I.S is a personal assistant that can - 
