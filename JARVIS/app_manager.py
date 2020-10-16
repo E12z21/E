@@ -1,7 +1,7 @@
 import os
 
 
-class AppOpener(object):
+class AppManager(object):
     def __init__(self):
         self.command = None
         self.exe = {
@@ -39,3 +39,7 @@ class AppOpener(object):
         self.command = 'start {}'.format(path)
         os.system('cmd /c "{}"'.format(self.command))
         return
+
+    def close(self, path):
+        path = str(os.path.split(str(path))[1]).lower()
+        os.system('taskkill /im {} /f'.format(path))
