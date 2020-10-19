@@ -5,7 +5,7 @@ class Web(object):
     def __init__(self):
         self.command = None
         self.search = None
-        self.keys = ['chrome', 'firefox']
+        self.keys = ['chrome', 'firefox', 'google maps']
 
     def goToUrL(self, command):
         self.command = command

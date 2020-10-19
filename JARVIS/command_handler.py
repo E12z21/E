@@ -1,11 +1,17 @@
-from JARVIS import web_searches, app_manager, calculator
+from JARVIS import web_searches, app_manager, calculator, weather, audio_manager, map_manager, time_manager, timetabler
 from playsound import playsound
+from datetime import datetime
 
 class Handler(object):
     def __init__(self):
         self.a = app_manager.AppManager()
         self.w = web_searches.Web()
         self.c = calculator.Calc()
+        self.weather = weather.Weather()
+        self.audio = audio_manager.Audio()
+        self.m = map_manager.Maps()
+        self.t = time_manager.Time()
+        self.s = timetabler.Timetabler()
         self.command = None
 
     def handleOpenCommands(self, query):
@@ -51,10 +57,17 @@ class Handler(object):
             if str(key).lower() == str(browser).lower():
                 if str(key).lower() == 'chrome':
                     playsound('audio/search_chrome.mp3')
-                else:
+                    command = str(exe[str(key)]) + ' https://www.google.com/search?q={}'.format(search)
+                    self.w.goToUrL(command)
+                elif str(key).lower() == 'firefox':
                     playsound('audio/search_firefox.mp3')
-                command = str(exe[str(key)]) + ' https://www.google.com/search?q={}'.format(search)
-                self.w.goToUrL(command)
+                    command = str(exe[str(key)]) + ' https://www.google.com/search?q={}'.format(search)
+                    self.w.goToUrL(command)
+                elif str(key).lower() == 'google maps':
+                    search = search.replace('+', ' ')
+                    self.m.showLocations(search)
+                    playsound('audio\\locating.mp3')
+                break
 
     def handleCloseCommands(self, query):
         query = str(query).replace('close ', '').lower()
@@ -94,4 +107,51 @@ class Handler(object):
             print('Sorry but the query you have typed currently does not exist')
 
         return answer
+
+    def handleManualWeatherCommands(self, query):
+        query = str(query).replace('what is the weather in ', '').lower()
+        self.weather.getWeatherManual(query)
+
+    def handleAudioCommands(self, query):
+        if str(query).lower() == 'mute':
+            print('')
+        elif 'set volume to' in str(query).lower():
+            value = str(query).replace('set volume to', '').replace('%', '').strip()
+            self.audio.changeVolume(value)
+        else:
+            print('Sorry but the command you typed currently does not exist.')
+
+    def handleMapsCommands(self, query):
+        query = str(query).replace('locate ', '')
+        self.m.showLocations(query)
+
+    def handleAutoTimeCommands(self):
+        time = self.t.returnTimeAuto()
+        return str(time)
+
+    def handleManualTimeCommands(self, query):
+        query = str(query).lower().replace('what is the time in ', '')
+        time = self.t.returnManualTime(query)
+        return str(time)
+
+    def handleTimetablerCommands(self, query):
+        if 'add' in str(query).lower():
+            query = str(query).lower().replace('add "', '').split('" to events with a due date of "')
+            self.s.addEvent(str(query[0]), str(query[1]))
+            print('Event added')
+        elif str(query).lower() == 'clear all events':
+            self.s.clearEvents()
+            print('Events Cleared')
+        elif 'remove' in str(query).lower():
+            query = str(query).lower().replace('remove "', '').replace('" from events', '')
+            self.s.removeEvent(query)
+            print('Event removed')
+        elif str(query).lower() == 'get events':
+            events = self.s.getEvents()
+            print(str(events))
+        elif 'check when' in str(query).lower():
+            query = str(query).lower().replace('check when "', '').replace('" is due', '')
+            self.s.manualCheckEvent(query)
+
+
 
